@@ -5,14 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const noBtn = document.getElementById('noBtn');
 
     let dodgeCount = 0;
-    const maxDodges = 3;
+    const maxDodges = 4;
 
     // Button dodging logic
     dropBtn.addEventListener('mouseover', (e) => {
         if (dodgeCount < maxDodges) {
             // Calculate random position within constraints
-            const x = (Math.random() - 0.5) * 300; // -150px to 150px
-            const y = (Math.random() - 0.5) * 150; // -75px to 75px
+            const x = (Math.random() - 0.5) * 350; 
+            const y = (Math.random() - 0.5) * 150; 
             
             dropBtn.style.transform = `translate(${x}px, ${y}px) scale(0.95)`;
             
@@ -21,18 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
             // Change button text slightly to tease
             const teases = [
                 "Nice try! 💅",
-                "Almost got it! 🤭",
-                "Wait, do you actually want to? 🥺"
+                "Wait, do you actually want to?",
+                "Are you sure you want to drop him?",
+                "Okay but what about the websites he made?"
             ];
             dropBtn.innerText = teases[dodgeCount - 1] || dropBtn.innerText;
         } else {
-            // After 3 dodges, return to center and let them click
+            // Return to center
             dropBtn.style.transform = `translate(0px, 0px) scale(1)`;
-            dropBtn.innerText = "Fine, Sign Petition 🙄";
+            dropBtn.innerText = "Fine. Sign it. 🙄";
         }
     });
 
-    // Reset button position if mouse leaves container entirely
+    // Reset button position
     document.querySelector('.button-container').addEventListener('mouseleave', () => {
         if (dodgeCount < maxDodges) {
             dropBtn.style.transform = `translate(0px, 0px) scale(1)`;
@@ -43,9 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Opening the modal
     dropBtn.addEventListener('click', () => {
-        // Only open if it stopped dodging or they managed to click it
         modalOverlay.classList.remove('hidden');
-        // Small delay to allow display flow to apply before opacity fades in
         setTimeout(() => {
             modalOverlay.classList.add('visible');
         }, 10);
@@ -53,8 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle "Yes" (Forgive) button
     yesBtn.addEventListener('click', () => {
-        yesBtn.innerText = "YAY! BESTIES AGAIN 🎉";
+        yesBtn.innerText = "BESTIES AGAIN 🌻💛";
         yesBtn.style.background = "#10b981"; // success green
+        yesBtn.style.color = "white";
         yesBtn.style.boxShadow = "0 0 25px rgba(16, 185, 129, 0.6)";
         noBtn.style.opacity = "0.3";
         noBtn.style.pointerEvents = "none";
@@ -64,13 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 modalOverlay.classList.add('hidden');
                 // Change hero to celebration
-                document.querySelector('.glitch').innerText = "BESTIES RESTORED 💖";
-                document.querySelector('.glitch').style.color = "#ec4899";
-                document.querySelector('.subtitle').innerText = "The gag is over. Shashwat is really sorry.";
+                document.querySelector('.glitch').innerText = "I'M SORRY LADDU 💛";
+                document.querySelector('.glitch').style.color = "#facc15";
+                document.querySelector('.subtitle').innerText = "Thank you for not actually replacing me with a tall, smart, ambivert.";
                 document.querySelector('.action-plan').style.display = 'none';
                 document.querySelector('.dossier').style.display = 'none';
+                document.querySelector('.requirements').style.display = 'none';
             }, 400);
-        }, 1500);
+        }, 2000);
     });
 
     // Handle "No" (Still mad) button playfully
@@ -84,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         noBtn.innerText = "Too bad, you gotta hit Yes! 😆";
         noBtn.style.transform = `translate(0, 0)`;
         setTimeout(() => {
-            noBtn.innerText = "No (I'm still mad)";
+            noBtn.innerText = "No, stay gone";
         }, 1500);
     });
 });
